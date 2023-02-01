@@ -38,3 +38,5 @@
             SELECT NULL, LOCALTIMESTAMP, @mod_op, p.* FROM persons p WHERE p.id = NEW.id;
         END IF;
     END;
+
+6. XML fájl elkészítése
