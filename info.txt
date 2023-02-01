@@ -40,3 +40,4 @@
     END;
 
 6. XML fájl elkészítése
+7. XML beolvasása

@@ -1,48 +1,48 @@
-<xml version="1.0" encoding="utf-8">
+<?xml version="1.0" encoding="utf-8" ?>
 <users>
     <user>
         <azonosito>1</azonosito>
         <teljes_nev>Sári Szabina</teljes_nev>
         <ado_azonosito>5394 5630 7930 1222</ado_azonosito>
-        <egyeb_id>4745852737</egyeb_id>
-        <belepes>2015.01.01</belepes>
-        <kilepes>2020.01.01</kilepes>
+        <egyeb_id>4745</egyeb_id>
+        <belepes>2015-01-01</belepes>
+        <kilepes>2020-01-01</kilepes>
         <email_cim>SariSzabina@armyspy.com</email_cim>
     </user>
     <user>
         <azonosito>2</azonosito>
         <teljes_nev>Kiss Péter</teljes_nev>
         <ado_azonosito>4556 5182 0144 4446</ado_azonosito>
-        <egyeb_id>2192836833</egyeb_id>
-        <belepes>2015.01.01</belepes>
-        <kilepes>2020.01.01</kilepes>
+        <egyeb_id>2192</egyeb_id>
+        <belepes>2015-01-01</belepes>
+        <kilepes>2020-01-01</kilepes>
         <email_cim>KissPeter@dayrep.com</email_cim>
     </user>
     <user>
         <azonosito>3</azonosito>
         <teljes_nev>Gyarmati Melinda</teljes_nev>
         <ado_azonosito>5137 0399 3486 4342</ado_azonosito>
-        <egyeb_id>9659897677</egyeb_id>
-        <belepes>2015.01.01</belepes>
-        <kilepes>2020.01.01</kilepes>
+        <egyeb_id>9659</egyeb_id>
+        <belepes>2015-01-01</belepes>
+        <kilepes>2020-01-01</kilepes>
         <email_cim>GyarmatiMelinda@armyspy.com</email_cim>
     </user>
     <user>
         <azonosito>4</azonosito>
         <teljes_nev>Salamon Bernadett</teljes_nev>
         <ado_azonosito>5488 0883 7018 1773</ado_azonosito>
-        <egyeb_id>1347453100</egyeb_id>
-        <belepes>2015.01.01</belepes>
-        <kilepes>2020.10.10</kilepes>
+        <egyeb_id>1347</egyeb_id>
+        <belepes>2015-01-01</belepes>
+        <kilepes>2020-10-10</kilepes>
         <email_cim>SalamonBernadett@jourrapide.com</email_cim>
     </user>
     <user>
         <azonosito>5</azonosito>
         <teljes_nev>Dobos Roland</teljes_nev>
         <ado_azonosito>5207 6710 7658 3549</ado_azonosito>
-        <egyeb_id>9614981110</egyeb_id>
-        <belepes>2015.01.01</belepes>
-        <kilepes>2020.01.01</kilepes>
+        <egyeb_id>9614</egyeb_id>
+        <belepes>2015-01-01</belepes>
+        <kilepes>2020-01-01</kilepes>
         <email_cim>DobosRoland@armyspy.com</email_cim>
     </user>
 </users>
