@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id()->comment('Rekord azonosító');
             $table->string('teljes_nev', 255)->index()->comment('Teljes név');
             
-            $table->string('email', 255)->unique()->index()->comment('Email cím');
+            $table->string('email_cim', 255)->unique()->index()->comment('Email cím');
             $table->string('ado_azonosito', 255)->unique()->index()->comment('Adó azonosító');
             $table->integer('egyeb_id')->unique()->index()->comment('Egyéb azonosító');
             

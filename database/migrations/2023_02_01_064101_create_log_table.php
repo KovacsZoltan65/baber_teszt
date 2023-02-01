@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('p_id')->nullable()->comment('"persons" rekord azonosító');
             $table->string('teljes_nev', 255)->nullable()->comment('Teljes név');
             
-            $table->string('email', 255)->nullable()->comment('Email cím');
+            $table->string('email_cim', 255)->nullable()->comment('Email cím');
             $table->string('ado_azonosito', 255)->nullable()->comment('Adó azonosító');
             $table->integer('egyeb_id')->nullable()->comment('Egyéb azonosító');
             
