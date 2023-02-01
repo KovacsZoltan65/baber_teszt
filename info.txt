@@ -1,0 +1,40 @@
+1. Project készítése:
+    composer create-project laravel/laravel baber_teszt
+    
+2. Adatbázis elkészítése:
+    CREATE DATABASE baber_teszt
+	    CHARACTER SET utf8
+	    COLLATE utf8_general_ci;
+
+3. adatbázis elérés beállítása a .env fájlban
+4. adatbázis migráció elkészítése:
+    php artisan make:migration create_persons_table
+    php artisan make:migration create_log_table
+    php artisan migrate
+
+5. Naplózás megvalósítása triggerekkel:
+    CREATE DEFINER=`root`@`localhost` TRIGGER baber_teszt.persons_AFTER_INSERT AFTER INSERT ON persons 
+    FOR EACH ROW
+    BEGIN
+        # Kell futtatni a triggert?
+        IF @disable_trigger IS NULL OR @disable_trigger = 0 THEN
+      
+            INSERT INTO baber_teszt.logs 
+            SELECT NULL, LOCALTIMESTAMP, 'I', p.* FROM persons p WHERE p.id = @id;
+
+        END IF;
+    END;
+
+    CREATE DEFINER='root'@'localhost' TRIGGER baber_teszt.persons_AFTER_UPDATE AFTER UPDATE ON persons
+	FOR EACH ROW
+    BEGIN
+        IF @disable_trigger IS NULL OR @disable_trigger = 0 THEN
+            SET @mod_op = 'U';
+            IF NEW.deleted_at IS NOT NULL THEN
+            SET @mod_op = 'D';
+            END IF;
+        
+            INSERT INTO baber_teszt.logs 
+            SELECT NULL, LOCALTIMESTAMP, @mod_op, p.* FROM persons p WHERE p.id = NEW.id;
+        END IF;
+    END;
