@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Person extends Model
+class File extends Model
 {
     use HasFactory,
         SoftDeletes;
-
-    protected $table = 'persons';
+    
+    protected $table = 'files';
     protected $primaryKey = 'id';
-    protected $fillable = ['teljes_nev','email_cim', 'ado_azonosito', 'egyeb_id', 'belepes', 'kilepes'];
-    protected $dates = ['belepes','kilepes', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['name', 'file_path', 'upload_date'];
+    protected $dates = ['upload_date', 'created_at', 'updated_at', 'deleted_at'];
     protected $hidden = ['deleted_at'];
 }

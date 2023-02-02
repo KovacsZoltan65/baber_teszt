@@ -1,11 +1,22 @@
+
+<?php
+$res = Session::get('res');
+$fileName = Session::get('fileName');
+?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>BaBer Teszt</title>
 
+        <!-- Bootstrap css -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+              rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
+              crossorigin="anonymous">
+        
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -19,9 +30,110 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
-
+        
+        <!-- JQUERY -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        
+        <!-- Bootstrap javascript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+                integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" 
+                crossorigin="anonymous"
+        ></script>
+        
     </head>
     <body class="antialiased">
+        
+        <div class="mb-3" style="margin-left: 100px; margin-right: 100px;">
+            
+            <form method="post" 
+                  action="{{ url('/') }}"
+                  enctype="multipart/form-data"
+            >
+                @csrf
+                
+                <!-- Hibátlan lefutás üzenete -->
+                @if( $message = Session::get('success') )
+                <div class="alert alert-success">
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
+                
+                <!-- Hibás lefutás üzenete -->
+                @if( $message = Session::get('error') )
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
+                
+                <!-- Validációs hibák -->
+                @if ( count($errors) > 0 )
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                
+                @if( !is_null($res) )
+                
+                    <!-- Adatbázis műveletek eredménye -->
+                    @if( count($res['errors']) > 0 )
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <td>Név</td>
+                        <td>eredmeny</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($res['errors'] as $error)
+                    <tr>
+                        <td>{{ $error['nev'] }}</td>
+                        <td>
+                            {{ $error['eredmeny'] }}
+                        </td>
+                    </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                    @endif
+                    
+                    @if( count($res['success']) > 0 )
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <td>Név</td>
+                        <td>eredmeny</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach( $res['success'] as $succ )
+                        <tr>
+                            <td>{{ $succ['nev'] }}</td>
+                            <td>{{ $succ['eredmeny'] }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                    @endif
+                    
+                @endif
 
+                <div class="form-group mt-4">
+                    <label for="formFile" class="form-label">Default file input example</label>
+                    <input class="form-control-file" type="file" id="formFile" name="formFile">
+                </div>
+                
+                <button 
+                    type="submit" 
+                    class="btn btn-primary"
+                    style="margin-top: 10px;"
+                >feltöltés</button>
+            </form>
+            
+        </div>
+        
     </body>
 </html>
