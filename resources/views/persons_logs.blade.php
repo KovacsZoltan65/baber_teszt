@@ -1,9 +1,3 @@
-
-<?php
-$res = Session::get('res');
-$fileName = Session::get('fileName');
-?>
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -44,102 +38,96 @@ $fileName = Session::get('fileName');
     <body class="antialiased">
         
         <div class="mb-3" style="margin-left: 100px; margin-right: 100px;">
-            <a href="/persons_logs" 
+            <a href="/" 
                 type="button" 
                 class="btn btn-primary"
                 style="margin-top: 10px;"
-            >PERSONS & LOGS</a>
+            >BACK</a>
         </div>
         
         <div class="mb-3" style="margin-left: 100px; margin-right: 100px;">
             
-            <form method="post" 
-                  action="{{ url('/') }}"
-                  enctype="multipart/form-data"
-            >
-                @csrf
-                
-                <!-- Hibátlan lefutás üzenete -->
-                @if( $message = Session::get('success') )
-                <div class="alert alert-success">
-                    <strong>{{ $message }}</strong>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">PERSONS & LOGS</div>
                 </div>
-                @endif
                 
-                <!-- Hibás lefutás üzenete -->
-                @if( $message = Session::get('error') )
-                <div class="alert alert-danger">
-                    <strong>{{ $message }}</strong>
-                </div>
-                @endif
-                
-                <!-- Validációs hibák -->
-                @if ( count($errors) > 0 )
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                
-                @if( !is_null($res) )
-                
-                    <!-- Adatbázis műveletek eredménye -->
-                    @if( count($res['errors']) > 0 )
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <td>Név</td>
-                        <td>eredmeny</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($res['errors'] as $error)
-                    <tr>
-                        <td>{{ $error['nev'] }}</td>
-                        <td>
-                            {{ $error['eredmeny'] }}
-                        </td>
-                    </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                    @endif
+                <div class="card-body">
                     
-                    @if( count($res['success']) > 0 )
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <td>Név</td>
-                        <td>eredmeny</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @foreach( $res['success'] as $succ )
-                        <tr>
-                            <td>{{ $succ['nev'] }}</td>
-                            <td>{{ $succ['eredmeny'] }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                    @endif
-                    
-                @endif
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" 
+                                    id="home-tab" 
+                                    data-bs-toggle="tab" 
+                                    data-bs-target="#home-tab-pane" 
+                                    type="button" 
+                                    role="tab" 
+                                    aria-controls="home-tab-pane" 
+                                    aria-selected="true"
+                            >Persons</button>
+                        </li>
+                        
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" 
+                                    id="profile-tab" 
+                                    data-bs-toggle="tab" 
+                                    data-bs-target="#profile-tab-pane" type="button" role="tab" 
+                                    aria-controls="profile-tab-pane" aria-selected="false"
+                            >Logs</button>
+                        </li>
 
-                <div class="form-group mt-4">
-                    <label for="formFile" class="form-label">Default file input example</label>
-                    <input class="form-control-file" type="file" id="formFile" name="formFile">
+                    </ul>
+                    
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                            <table class="table table-bordered table-striped mt-4">
+                                <thead>
+                                    <tr>
+                                        <th>Név</th>
+                                        <th>email</th>
+                                        <th>adó azon</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach( $persons as $person )
+                                <tr>
+                                    <td>{{ $person->teljes_nev }}</td>
+                                    <td>{{ $person->email_cim }}</td>
+                                    <td>{{ $person->ado_azonosito }}</td>
+                                </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                            <table class="table table-bordered table-striped mt-4">
+                                <thead>
+                                    <tr>
+                                        <th>mod.dátum</th>
+                                        <th>mod.op</th>
+                                        <th>név</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($persons_logs as $log)
+                                    <tr>
+                                        <td>{{ $log->mod_date }}</td>
+                                        <td>{{ $log->mod_op }}</td>
+                                        <td>{{ $log->teljes_nev }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
                 </div>
                 
-                <button 
-                    type="submit" 
-                    class="btn btn-primary"
-                    style="margin-top: 10px;"
-                >feltöltés</button>
-            </form>
+                <div class="card-footer">
+                    FOOTER
+                </div>
+                
+            </div>
             
         </div>
         

@@ -21,3 +21,5 @@ Route::get('/', function () {
 });
 
 Route::post('/', [\App\Http\Controllers\UploadFileController::class, 'uploadFile'])->name('showUploadFile');
+
+Route::get('/persons_logs', [App\Http\Controllers\PersonsLogsController::class, 'index']);
